@@ -7,3 +7,5 @@ def get_connection():
         password="your_password",
         database="your_database"
     )
+    # 🔐 Replace with your own local MySQL credentials
+
