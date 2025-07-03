@@ -1,9 +1,9 @@
-import mysql.connector
-
+# db_config.py
 def get_connection():
+    import mysql.connector
     return mysql.connector.connect(
         host="localhost",
-        user="root",        # change this
-        password="Rujal.122",    # change this
-        database="ev_swap_db"
+        user="your_username",
+        password="your_password",
+        database="your_database"
     )
