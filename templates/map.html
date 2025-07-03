@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>EV Battery Swap Station Locator</title>
+
+  <!-- Links for Leaflet and CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='map.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+</head>
+
+<header class="app-header">
+  <div class="header-content">
+    <a href="/" class="home-button">← Home</a>
+    <h1>🔋 EV Battery Swap Locator</h1>
+    <p class="subtitle">Find the nearest EV battery swap stations across India</p>
+
+  </div>
+</header>
+
+
+<body>
+
+<div class="flex-container">
+  
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-inner">
+      
+      <input type="text" id="citySearch" onkeyup="filterStations()" placeholder="Search by city...">
+<p id="statusMessage" style="text-align: center; color: #6b7280; font-size: 14px;">
+  🔍 Start typing to search for EV swap stations.
+</p>
+
+      <div id="stationList">
+        {% for station in stations %}
+        <div class="station-card" data-city="{{ station.city }}">
+          <h2>{{ station.name }}</h2>
+          <p>{{ station.address }}</p>
+          <p>{{ station.city }} - {{ station.pincode }}</p>
+          <p><strong>Batteries:</strong> {{ station.battery_available }}</p>
+          <p><strong>Hours:</strong> {{ station.hours }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-container">
+    <div id="map"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script id="station-data" type="application/json">
+  {{ stations | tojson }}
+</script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
